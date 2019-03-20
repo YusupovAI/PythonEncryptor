@@ -22,10 +22,15 @@ def hack(args):
 
 def train_caesar(args):
     with open(args.model, 'w') as file, get_stream(args.input, 'r') as input:
-        text = re.sub(r'[^a-z]', '', input.read().lower())
+        text = input.read().lower()
         model = Counter()
         for i in range(ord('a'), ord('z') + 1):
             model[chr(i)] = text.count(chr(i)) / len(text)
+
+        for i in range(len(text) - 2):
+            cur = text[i:i + 3]
+            if cur.isalpha():
+                model[cur] += 1
         json.dump(model, file, indent=4)
 
 
@@ -51,8 +56,30 @@ def hack_caesar(args):
                                                    'r') as input:
         model_data = json.load(file)
         text = input.read().lower()
-        args.key = find_key(text, model_data)
-        decode.decode(args)
+        if len(text) > 1000:
+            args.key = find_key(text, model_data)
+            decode.decode(args)
+        else:
+            best_probability = 0
+            best_key = 0
+            for i in range(26):
+                probability = 0
+
+                def change(char):
+                    cur = str(char.group())
+                    return cycle.cycle(cur, 'a', 'z', -i)
+
+                for j in range(len(text) - 2):
+                    cur = text[j:j + 3]
+                    if cur.isalpha():
+                        cur = re.sub(r'[a-z]', change, cur)
+                        probability += model_data[
+                            cur] if cur in model_data else 0
+                if probability >= best_probability:
+                    best_key = i
+                    best_probability = probability
+            args.key = best_key
+            decode.decode(args)
 
 
 def index(string):
