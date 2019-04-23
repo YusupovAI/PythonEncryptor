@@ -4,7 +4,7 @@ from encode import vernam
 
 
 def test_caesar_simple():
-    assert caesar('abc ', 1) == 'bcd; A '
+    assert caesar('abc ', 1) == 'bcd '
 
 
 def test_caesar_with_symbols():
