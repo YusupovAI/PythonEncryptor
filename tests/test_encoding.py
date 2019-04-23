@@ -3,8 +3,12 @@ from encode import vigenere
 from encode import vernam
 
 
-def test_caesar():
-    assert caesar('abc; Z ', 1) == 'bcd; A '
+def test_caesar_simple():
+    assert caesar('abc ', 1) == 'bcd; A '
+
+
+def test_caesar_with_symbols():
+    assert caesar(';ad;;asz ,', 2) == ';cf;;cub ,'
 
 
 def test_vigenere():
