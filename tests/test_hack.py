@@ -1,6 +1,5 @@
 from app.model import hack_vigenere, hack_caesar
 from app.encode import vigenere
-import json
 from tests.models import caesar_model, vigenere_model
 
 
