@@ -8,3 +8,10 @@ def test_caesar():
         assert hack_caesar('Hello', json.load(file)) == 0
 
 
+def test_vigenere():
+    with open('model_vigenere.json', 'r') as file:
+        assert hack_vigenere(vigenere(
+            "Please, call me Lenny, "
+            "I'd like to be the most popular singer all over the world!",
+            'a'),
+            json.load(file)) == 'a'
