@@ -101,18 +101,20 @@ def train_vigenere(text):
 def hack_vigenere(text, model):
     text = re.sub(r'[^a-z]', '', text.lower())
     length = len(text)
-    current = min(length, 10000)
     fitted = model['index']
-    i = 2
-    while i < 10000:
+    i = min(length // 100, 100)
+    best_diff = 10000
+    best_len = 0
+
+    while i > 0:
         cur_index = 0
         for j in range(i):
             cur_index += index(text[j::i])
-        if abs(cur_index / i - fitted) < 10 ** (-5):
-            current = i
-            break
-        i += 1
+        if abs(cur_index / i - fitted) < best_diff + 10 ** -3:
+            best_diff = abs(cur_index / i - fitted)
+            best_len = i
+        i -= 1
     keys = []
-    for i in range(current):
-        keys.append(chr(find_key(text[i::current], model) + ord('a')))
+    for i in range(best_len):
+        keys.append(chr(find_key(text[i::best_len], model) + ord('a')))
     return ''.join(keys)

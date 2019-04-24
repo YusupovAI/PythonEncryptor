@@ -55,10 +55,10 @@ def vernam(text, key):
 
 def decode(args):
     with get_stream(args.input, 'r') as input, get_stream(args.output,
-                                                          'a') as output:
+                                                          'w') as output:
         if args.cipher == 'caesar':
-            output.write(input.read(), int(args.key))
+            output.write(caesar(input.read(), int(args.key)))
         elif args.cipher == 'vigenere':
-            output.write(input.read(), args.key)
+            output.write(vigenere(input.read(), args.key))
         elif args.cipher == 'vernam':
-            output.write(input.read(), args.key)
+            output.write(vernam(input.read(), args.key))
