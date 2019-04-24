@@ -102,7 +102,7 @@ def hack_vigenere(text, model):
     text = re.sub(r'[^a-z]', '', text.lower())
     length = len(text)
     fitted = model['index']
-    i = min(length // 100, 100)
+    i = min(length // 10, 100)
     best_diff = 10000
     best_len = 0
 

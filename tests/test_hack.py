@@ -44,5 +44,5 @@ Proving his beauty by succession thine!
   This were to be new made when thou art old,
   And see thy blood warm when thou feel'st it cold.
 ''',
-        'a'),
-        vigenere_model) == 'a'
+        'abc'),
+        vigenere_model) == 'abc'
