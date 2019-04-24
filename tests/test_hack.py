@@ -1,12 +1,11 @@
 from app.model import hack_vigenere, hack_caesar
 from app.encode import vigenere
 import json
+from tests.models import caesar_model, vigenere_model
 
 
 def test_caesar():
-    with open('model_caesar.json', 'r') as file:
-        assert hack_caesar('Hello', json.load(file)) == 0
-
+    assert hack_caesar('Hello', caesar_model) == 0
 
 # def test_vigenere():
 #     with open('model_vigenere.json', 'r') as file:
