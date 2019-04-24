@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-import encode
-import decode
-import model
-import text_worker
+from app import decode, encode, model
 
 cipher_types = ['caesar', 'vigenere', 'vernam']
 

@@ -1,4 +1,4 @@
-from decode import caesar, vernam, vigenere
+from app.decode import caesar, vernam, vigenere
 
 
 def test_caesar():

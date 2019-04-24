@@ -1,6 +1,6 @@
 import re
-from cycle import cycle
-from text_worker import get_stream
+from app.cycle import cycle
+from app.text_worker import get_stream
 
 
 def caesar(text, key):
@@ -35,13 +35,13 @@ def vigenere(text, key):
 def vernam(text, key):
     pos = -1
 
-    def chunkstring(string, length):
+    def chunk_string(string, length):
         return (string[0 + i:length + i] for i in
                 range(0, len(string), length))
 
     while len(key) % 7 != 0:
         key += '0'
-    key = [int(i, 2) for i in chunkstring(key, 7)]
+    key = [int(i, 2) for i in chunk_string(key, 7)]
 
     def change(c):
         nonlocal pos

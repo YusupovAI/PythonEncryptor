@@ -1,6 +1,6 @@
-from encode import caesar
-from encode import vigenere
-from encode import vernam
+from app.encode import caesar
+from app.encode import vigenere
+from app.encode import vernam
 
 
 def test_caesar_simple():

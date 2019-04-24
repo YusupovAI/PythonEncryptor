@@ -1,7 +1,7 @@
 import re
-from cycle import cycle
-import text_worker
-from text_worker import get_stream
+from app.cycle import cycle
+from app import text_worker
+from app.text_worker import get_stream
 
 
 def caesar(text, key):
