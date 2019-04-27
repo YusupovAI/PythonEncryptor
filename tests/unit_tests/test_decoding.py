@@ -34,5 +34,5 @@ def test_vigenere_hard():
 
 
 def test_vernam():
-    assert vernam('abc', '1000000') == ''.join(
+    assert vernam('abc', '01000000') == ''.join(
         map(lambda x: chr(ord(x) ^ 64), ['a', 'b', 'c']))
