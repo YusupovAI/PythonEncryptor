@@ -34,6 +34,6 @@ def test_vigenere_hard():
 def test_vernam():
     s = 'Hello'
     l = list(s)
-    key = '1010101'
-    assert vernam(s, key) == ''.join(
-        map(lambda c: chr(ord(c) ^ int(key, 2)), l))
+    key = '10101010'
+    answer = ''.join(map(lambda c: chr(ord(c) ^ int(key, 2)), l))
+    assert vernam(s, key) == answer

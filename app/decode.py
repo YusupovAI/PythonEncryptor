@@ -39,17 +39,16 @@ def vernam(text, key):
         return (string[0 + i:length + i] for i in
                 range(0, len(string), length))
 
-    while len(key) % 7 != 0:
+    while len(key) % 8 != 0:
         key += '0'
-    key = [int(i, 2) for i in chunk_string(key, 7)]
+    key = [int(i, 2) for i in chunk_string(key, 8)]
 
     def change(c):
         nonlocal pos
         pos += 1
-        char = str(c.group())
-        return chr(ord(char) ^ key[pos % len(key)])
+        return chr(ord(c) ^ key[pos % len(key)])
 
-    res = re.sub(r'[a-z]|[A-Z]', change, text)
+    res = ''.join(map(change, list(text)))
     return res
 
 
