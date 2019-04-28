@@ -19,6 +19,7 @@ def caesar(text, key):
 def vigenere(text, key):
     pos = -1
     key = key.lower()
+    key = re.sub(r'[^a-z]', '', key)
 
     def change(c):
         cur = str(c.group())
