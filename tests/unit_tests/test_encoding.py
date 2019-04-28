@@ -1,6 +1,7 @@
 from app.encode import caesar
 from app.encode import vigenere
 from app.encode import vernam
+from app.to_byte import to_byte
 
 
 def test_caesar_simple():
@@ -32,8 +33,8 @@ def test_vigenere_hard():
 
 
 def test_vernam():
-    s = 'Hello'
+    s = 'Hello '
     l = list(s)
     key = '10101010'
-    answer = ''.join(map(lambda c: chr(ord(c) ^ int(key, 2)), l))
+    answer = ''.join(map(lambda c: to_byte(ord(c) ^ int(key, 2)), l))
     assert vernam(s, key) == answer

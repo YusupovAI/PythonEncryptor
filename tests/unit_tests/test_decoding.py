@@ -1,4 +1,5 @@
 from app.decode import caesar, vernam, vigenere
+from app.to_byte import to_byte
 
 
 def test_caesar_simple():
@@ -34,5 +35,4 @@ def test_vigenere_hard():
 
 
 def test_vernam():
-    assert vernam('abc', '01000000') == ''.join(
-        map(lambda x: chr(ord(x) ^ 64), ['a', 'b', 'c']))
+    assert vernam(to_byte(1), '01000000') == 'A'

@@ -7,7 +7,7 @@ def generate_text():
     return ''.join(random.choices(
         string.ascii_uppercase + string.digits + string.ascii_lowercase +
         string.punctuation + string.punctuation,
-        k=random.randint(0, 10000)))
+        k=random.randint(0, 10 ** 5)))
 
 
 def test_caesar():

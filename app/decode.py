@@ -46,10 +46,12 @@ def vernam(text, key):
 
     def change(c):
         nonlocal pos
+        cur = int(c, 2)
         pos += 1
-        return chr(ord(c) ^ key[pos % len(key)])
+        return chr(cur ^ key[pos % len(key)])
 
-    res = ''.join(map(change, list(text)))
+    res = ''.join(map(change, chunk_string(text, 8)))
+
     return res
 
 
@@ -61,4 +63,5 @@ def decode(args):
         elif args.cipher == 'vigenere':
             output.write(vigenere(input.read(), args.key))
         elif args.cipher == 'vernam':
-            output.write(vernam(input.read(), args.key))
+            output.write(
+                vernam(input.read(), args.key))

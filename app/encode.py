@@ -2,6 +2,7 @@ import re
 from app.cycle import cycle
 from app import text_worker
 from app.text_worker import get_stream
+from app.to_byte import to_byte
 
 
 def caesar(text, key):
@@ -47,8 +48,9 @@ def vernam(text, key):
 
     def change(c):
         nonlocal pos
+        char = c
         pos += 1
-        return chr(ord(c) ^ key[pos % len(key)])
+        return to_byte(ord(char) ^ key[pos % len(key)])
 
     res = ''.join(map(change, list(text)))
     return res
@@ -62,4 +64,6 @@ def encode(args):
         elif args.cipher == 'vigenere':
             output.write(vigenere(input.read(), args.key))
         elif args.cipher == 'vernam':
-            output.write(vernam(input.read(), args.key))
+            output.write(
+                vernam(input.read().encode('ascii', errors='ignore').decode(),
+                       args.key))
