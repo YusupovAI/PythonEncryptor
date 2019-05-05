@@ -1,33 +1,71 @@
-from app import decode, encode
-import string
+from app.encode import encode
+from app.decode import decode
 import random
 
 
-def generate_text():
-    return ''.join(random.choices(
-        string.ascii_uppercase + string.digits + string.ascii_lowercase +
-        string.punctuation + string.punctuation,
-        k=random.randint(0, 10 ** 5)))
+class Arguments(object):
+    def __init__(self, input, output, cipher, key):
+        self.input = input
+        self.output = output
+        self.cipher = cipher
+        self.key = key
 
 
-def test_caesar():
-    for i in range(100):
-        text = generate_text()
-        key = random.randint(0, 10000)
-        assert decode.caesar(encode.caesar(text, key), key) == text
+def test_caesar_small():
+    args_encode = Arguments('sonnets.txt', 'out.txt', 'caesar', '25')
+    encode(args_encode)
+    args_decode = Arguments('out.txt', 'tmp.txt', 'caesar', '25')
+    decode(args_decode)
+    with open('tmp.txt', 'r') as result, open('sonnets.txt', 'r') as answer:
+        assert result.read() == answer.read()
 
 
-def test_vigenere():
-    for i in range(100):
-        text = generate_text()
-        key = ''.join(
-            random.choices(string.ascii_lowercase + string.ascii_uppercase,
-                           k=random.randint(0, 10000)))
-        assert decode.vigenere(encode.vigenere(text, key), key) == text
+def test_caesar_large():
+    args_encode = Arguments('pg200.txt', 'out.txt', 'caesar', '20')
+    encode(args_encode)
+    args_decode = Arguments('out.txt', 'tmp.txt', 'caesar', '20')
+    decode(args_decode)
+    with open('tmp.txt', 'r') as result, open('pg200.txt') as answer:
+        assert result.read() == answer.read()
 
 
-def test_vernam():
-    for i in range(100):
-        text = generate_text()
-        key = ''.join(random.choices(['0', '1'], k=random.randint(0, 10000)))
-        assert decode.vernam(encode.vernam(text, key), key) == text
+def test_vigenere_small():
+    key = 'asdasd askldsanda oa ;'
+    args_encode = Arguments('sonnets.txt', 'out.txt', 'vigenere', key)
+    encode(args_encode)
+    args_decode = Arguments('out.txt', 'tmp.txt', 'vigenere', key)
+    decode(args_decode)
+    with open('tmp.txt', 'r') as result, open('sonnets.txt', 'r') as answer:
+        assert result.read() == answer.read()
+
+
+def test_vigenere_large():
+    key = 'adasd asmd, saj da f. ewjmd aksdl jk1k/k fjk; wl'
+    args_encode = Arguments('pg200.txt', 'out.txt', 'vigenere', key)
+    encode(args_encode)
+    args_decode = Arguments('out.txt', 'tmp.txt', 'vigenere', key)
+    decode(args_decode)
+    with open('tmp.txt', 'r') as result, open('pg200.txt') as answer:
+        assert result.read() == answer.read()
+
+
+def test_vernam_small():
+    key = '01001010110111010010101010101111100101'
+    args_encode = Arguments('sonnets.txt', 'out.txt', 'vernam', key)
+    encode(args_encode)
+    args_decode = Arguments('out.txt', 'tmp.txt', 'vernam', key)
+    decode(args_decode)
+    with open('tmp.txt', 'r') as result, open('sonnets.txt', 'r') as answer:
+        assert result.read() == answer.read()
+
+
+def test_vernam_large():
+    key = ''.join(random.choices(['0', '1'], k=random.randint(0, 10000)))
+    args_encode = Arguments('pg200.txt', 'out.txt', 'vernam', key)
+    encode(args_encode)
+    args_decode = Arguments('out.txt', 'tmp.txt', 'vernam', key)
+    decode(args_decode)
+    with open('tmp.txt', 'r') as result, open('pg200.txt') as answer:
+        assert result.read().encode('ascii',
+                                    errors='ignore') == answer.read().encode(
+            'ascii', errors='ignore')
