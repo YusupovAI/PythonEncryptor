@@ -1,4 +1,4 @@
-from app.encode import caesar, vigenere, vernam
+from app import encode, decode
 from tests.random_generators import generate_text
 import numpy as np
 from matplotlib import pyplot as plt
@@ -12,8 +12,9 @@ def measure_caesar():
     for size in sizes:
         text = generate_text(size)
         start = time.time()
-        caesar(text, key)
+        res = encode.caesar(text, key)
         result.append(time.time() - start)
+        assert decode.caesar(res, key) == text
     return result
 
 
@@ -23,8 +24,9 @@ def measure_vigenere():
     for size in sizes:
         text = generate_text(size)
         start = time.time()
-        vigenere(text, key)
+        res = encode.vigenere(text, key)
         result.append(time.time() - start)
+        assert decode.vigenere(res, key) == text
     return result
 
 
@@ -34,8 +36,9 @@ def measure_vernam():
     for size in sizes:
         text = generate_text(size)
         start = time.time()
-        vernam(text, key)
+        res = encode.vernam(text, key)
         result.append(time.time() - start)
+        assert decode.vernam(res, key) == text
     return result
 
 
