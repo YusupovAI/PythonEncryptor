@@ -9,5 +9,9 @@ script:
   - pytest
 notifications:
   email:
-    - iusupov.ai@phystech.edu
-    - yusupovartyom@gmail.com
+    recipients:
+      - iusupov.ai@phystech.edu
+      - yusupovartyom@gmail.com
+    on_success: always
+    on_failure: always
+
