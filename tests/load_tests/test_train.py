@@ -11,7 +11,7 @@ def measure_caesar():
     for size in sizes:
         text = generate_text(size)
         start = time()
-        train_caesar(text)
+        train_caesar(text, 3)
         result.append(time() - start)
     return result
 

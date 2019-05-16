@@ -2,7 +2,7 @@ from app.model import train_caesar, train_vigenere, index
 
 
 def test_caesar():
-    result = train_caesar('Hello')
+    result = train_caesar('Hello', 3)
     answer = dict()
     for char in range(ord('a'), ord('z') + 1):
         answer[chr(char)] = 0

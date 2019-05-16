@@ -5,7 +5,7 @@ from tests.models import caesar_model, vigenere_model
 
 def test_caesar_short():
     """There are two different algorithms for short and long strings"""
-    assert hack_caesar('Hello', caesar_model) == 0
+    assert hack_caesar('Hello', caesar_model, 3) == 0
 
 
 def test_caesar_long():
@@ -76,7 +76,7 @@ And, to enlighten thee, gave eyes to blindness,
 Or made them swear against the thing they see;
   For I have sworn thee fair; more perjur'd I,
   To swear against the truth so foul a lie.!
-''', caesar_model) == 0
+''', caesar_model, 3) == 0
 
 
 def test_vigenere():

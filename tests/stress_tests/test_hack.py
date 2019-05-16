@@ -7,6 +7,7 @@ class Arguments(object):
         self.cipher = cipher
         self.output = ostream
         self.model = model
+        self.grams = 3
 
 
 def test_caesar_small():
