@@ -1,4 +1,4 @@
-def cycle(c, left, right, key):
+def cycle(letter, left, right, key):
     length = ord(right) - ord(left) + 1
     return chr(
-        ((ord(c) - ord(left) + key) % length + length) % length + ord(left))
+        ((ord(letter) - ord(left) + key) % length + length) % length + ord(left))

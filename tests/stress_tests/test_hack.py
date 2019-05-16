@@ -2,10 +2,10 @@ from app.model import hack
 
 
 class Arguments(object):
-    def __init__(self, input, output, model, cipher):
-        self.input = input
+    def __init__(self, istream, ostream, model, cipher):
+        self.input = istream
         self.cipher = cipher
-        self.output = output
+        self.output = ostream
         self.model = model
 
 

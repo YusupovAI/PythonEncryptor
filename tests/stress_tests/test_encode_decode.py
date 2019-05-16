@@ -4,9 +4,9 @@ import random
 
 
 class Arguments(object):
-    def __init__(self, input, output, cipher, key):
-        self.input = input
-        self.output = output
+    def __init__(self, istream, ostream, cipher, key):
+        self.input = istream
+        self.output = ostream
         self.cipher = cipher
         self.key = key
 

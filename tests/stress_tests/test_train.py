@@ -2,8 +2,8 @@ from app.model import train
 
 
 class Arguments(object):
-    def __init__(self, input, model, cipher):
-        self.input = input
+    def __init__(self, istream, model, cipher):
+        self.input = istream
         self.cipher = cipher
         self.model = model
 

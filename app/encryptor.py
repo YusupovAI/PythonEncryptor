@@ -3,12 +3,12 @@ import argparse
 import sys
 from app import decode, encode, model
 
-cipher_types = ['caesar', 'vigenere', 'vernam']
+CIPHER_TYPES = ['caesar', 'vigenere', 'vernam']
 
 
 def add_encoding(subparsers):
     parser_encode = subparsers.add_parser('encode')
-    parser_encode.add_argument('--cipher', choices=cipher_types)
+    parser_encode.add_argument('--cipher', choices=CIPHER_TYPES)
     parser_encode.add_argument('--key')
     parser_encode.add_argument('--input-file', dest='input', default=sys.stdin)
     parser_encode.add_argument('--output-file', dest='output',
@@ -18,7 +18,7 @@ def add_encoding(subparsers):
 
 def add_decoding(subparsers):
     parser_decode = subparsers.add_parser('decode')
-    parser_decode.add_argument('--cipher', choices=cipher_types)
+    parser_decode.add_argument('--cipher', choices=CIPHER_TYPES)
     parser_decode.add_argument('--key')
     parser_decode.add_argument('--input-file', dest='input', default=sys.stdin)
     parser_decode.add_argument('--output-file', dest='output',
@@ -31,6 +31,7 @@ def add_train(subparsers):
     parser_train.add_argument('--cipher', default='caesar')
     parser_train.add_argument('--text-file', dest='input')
     parser_train.add_argument('--model-file', dest='model')
+    parser_train.add_argument('--n-grams', dest='grams', default=3)
     parser_train.set_defaults(func=model.train)
 
 
@@ -41,6 +42,7 @@ def add_hack(subparsers):
                              default=sys.stdout)
     parser_hack.add_argument('--model-file', dest='model')
     parser_hack.add_argument('--cipher', default='caesar')
+    parser_hack.add_argument('--n-grams', dest='grams', default=3)
     parser_hack.set_defaults(func=model.hack)
 
 
@@ -53,7 +55,7 @@ def main():
     add_encoding(subparsers)
     add_hack(subparsers)
     add_train(subparsers)
-    args = parser.parse_args(sys.argv[1:])
+    args = parser.parse_args()
     args.func(args)
 
 

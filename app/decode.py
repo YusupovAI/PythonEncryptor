@@ -4,8 +4,8 @@ from app.text_worker import get_stream
 
 
 def caesar(text, key):
-    def change(c):
-        cur = str(c.group())
+    def change(letter):
+        cur = str(letter.group())
         if 'a' <= cur <= 'z':
             return cycle(cur, 'a', 'z', -key)
         if 'A' <= cur <= 'Z':
@@ -20,8 +20,8 @@ def vigenere(text, key):
     key = key.lower()
     key = re.sub(r'[^a-z]', '', key)
 
-    def change(c):
-        cur = str(c.group())
+    def change(letter):
+        cur = str(letter.group())
         nonlocal pos
         pos += 1
         if 'a' <= cur <= 'z':
@@ -40,13 +40,14 @@ def vernam(text, key):
         return (string[0 + i:length + i] for i in
                 range(0, len(string), length))
 
-    while len(key) % 8 != 0:
+    byte_length = 8
+    while len(key) % byte_length != 0:
         key += '0'
-    key = [int(i, 2) for i in chunk_string(key, 8)]
+    key = [int(i, 2) for i in chunk_string(key, byte_length)]
 
-    def change(c):
+    def change(letter):
         nonlocal pos
-        cur = int(c, 2)
+        cur = int(letter, 2)
         pos += 1
         return chr(cur ^ key[pos % len(key)])
 
@@ -56,12 +57,12 @@ def vernam(text, key):
 
 
 def decode(args):
-    with get_stream(args.input, 'r') as input, get_stream(args.output,
-                                                          'w') as output:
+    with get_stream(args.input, 'r') as istream, get_stream(args.output,
+                                                          'w') as ostream:
         if args.cipher == 'caesar':
-            output.write(caesar(input.read(), int(args.key)))
+            ostream.write(caesar(istream.read(), int(args.key)))
         elif args.cipher == 'vigenere':
-            output.write(vigenere(input.read(), args.key))
+            ostream.write(vigenere(istream.read(), args.key))
         elif args.cipher == 'vernam':
-            output.write(
-                vernam(input.read(), args.key))
+            ostream.write(
+                vernam(istream.read(), args.key))
