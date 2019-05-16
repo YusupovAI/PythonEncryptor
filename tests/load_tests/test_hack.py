@@ -22,7 +22,7 @@ def measure_vigenere():
     for size in sizes:
         text = generate_text(size)
         start = time()
-        hack_caesar(text, vigenere_model)
+        hack_vigenere(text, vigenere_model)
         result.append(time() - start)
     return result
 
