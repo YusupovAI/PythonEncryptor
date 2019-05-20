@@ -6,8 +6,7 @@ from collections import Counter
 
 
 def train(args):
-    with open(args.model, 'w') as model, get_stream(args.input,
-                                                      'r') as istream:
+    with open(args.model, 'w') as model, get_stream(args.input, 'r') as istream:
         if args.cipher == 'caesar':
             json.dump(train_caesar(istream.read(), int(args.grams)), model,
                       indent=4)

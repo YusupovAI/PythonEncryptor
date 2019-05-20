@@ -57,8 +57,7 @@ def vernam(text, key):
 
 
 def decode(args):
-    with get_stream(args.input, 'r') as istream, get_stream(args.output,
-                                                          'w') as ostream:
+    with get_stream(args.input, 'r') as istream, get_stream(args.output, 'w') as ostream:
         if args.cipher == 'caesar':
             ostream.write(caesar(istream.read(), int(args.key)))
         elif args.cipher == 'vigenere':

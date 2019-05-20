@@ -1,7 +1,7 @@
-def to_byte(n):
+def to_byte(number):
     res = []
     byte_length = 8
     for i in range(byte_length):
-        res.append(n % 2)
-        n //= 2
+        res.append(number % 2)
+        number //= 2
     return ''.join(map(str, reversed(res)))
