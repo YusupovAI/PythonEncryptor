@@ -1,21 +1,16 @@
 # Python encryptor
-Здесь лежит код шифратора/дешифратора/простого взломщика. Весь код по 
-проекту лежит в папке `app`.
-# Тестирование
-Тестирование вполняется с помощью фреймворка `pytest`. 
-Все подробности описаны в `tests/README.md`
-## Результаты тестов
-В папке `test_results_images` можно посмотреть на графики роста времани
-с росто объёма данных.
+This simple program, which provides you with ability to encrypt
+and decrypt texts with Caesar, Vigenere and Vernam ciphers.
+# Testing
+I use `pytest` framework.
+For more details yu can read `tests/README.md`
+## Test results
+In `test_results_images` directory you can look at plot
+of execution time of versus text size.
 
-В папке `test_results_text` можно посмотреть эти же результаты но в текстовом
-виде.
-## Вспомогательные файлы
-* `.travis.yml` - настройка CI.
-* `pg200.txt` и `sonnets.txt` - нужны для стресс тестирования.
-* `requirements.txt` - зависимости проекта.
-* `vigenere_model.json` и `caesar_model.json` нужны для тестирования хака.
-* `setup.py` - сборка пакета.
-# Continious integration
-С помощью `travis-ci` выполняется тестирование того, как пакет собирается
-и как проходят тесты.
+In `test_results_text` you can see these results in text format.
+## Additional files
+* `.travis.yml` - CI configuration.
+* `pg200.txt` and `sonnets.txt` - for stress testing and measurements.
+* `requirements.txt` - project dependencies.
+* `vigenere_model.json` and `caesar_model.json` are needed to test hack mode.
